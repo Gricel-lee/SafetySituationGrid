@@ -1,2 +1,2 @@
-# SafetySituationGrid
-# Safety Situation Grid
+# Probabilistic Safety Verification: A Situation Coverage Grid Approach
+
