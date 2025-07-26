@@ -1,27 +1,35 @@
 import pandas as pd
 import os
+import sys
 
-
-import pandas as pd
-import os
-
-def create_folder(fpath, name):
-    # Get the directory from the file path
-    dir_path = os.path.join(os.path.dirname(fpath), name)
-
-    # Create the directory if it doesn't exist
-    os.makedirs(dir_path, exist_ok=True)  # `exist_ok=True` avoids errors if the directory already exists
-    
-    return dir_path
+"""This script generates a PRISM model file from an augmented situation coverage grid CSV file.
+It reads the CSV file, processes the transitions between states based on actions and probabilities,
+and writes the PRISM model to a new file in a specified output directory.
+The script also handles Excel files by converting them to CSV format if necessary.
+"""
 
 def generate_prism_file(fpath, init_state=1):
+    """Generates a PRISM model file from an augmented situation coverage grid CSV file.
+    Args:
+        fpath (str): Path to the augmented situation coverage grid CSV file.
+        init_state (int): Initial state for the PRISM model. Default is 1.
+    Returns:
+        str: Path to the generated PRISM model file.
+    """
+    # Check if the file is an Excel file and convert it to CSV if necessary
+    if fpath.endswith('.xlsx'):
+        fpath = _convert_xlsx_to_csv(fpath)
+    elif not fpath.endswith('.csv'):
+        raise ValueError("Input file must be a CSV or Excel file (.csv or .xlsx)")
+    
+    # Read the CSV file
     df = pd.read_csv(fpath, index_col=False)
     
-    # get file name
+    # Get file name
     fname = os.path.basename(fpath)
     
-    # create "output" folder
-    output_folder = create_folder(fpath, "gen-output")
+    # Create "output" folder
+    output_folder = _create_folder(fpath, "gen-model")
 
     prism_file = os.path.join(output_folder, f"{fname.split('.')[0]}.prism")
 
@@ -60,10 +68,17 @@ def generate_prism_file(fpath, init_state=1):
     return prism_file
 
 
-import pandas as pd
-import os
+def _create_folder(fpath, name):
+    # Get the directory from the file path
+    dir_path = os.path.join(os.path.dirname(fpath), name)
 
-def convert_xlsx_to_csv(xlsx_file):
+    # Create the directory if it doesn't exist
+    os.makedirs(dir_path, exist_ok=True)  # `exist_ok=True` avoids errors if the directory already exists
+    
+    return dir_path
+    
+
+def _convert_xlsx_to_csv(xlsx_file):
     try:
         # Extract the directory and file name (without extension)
         directory, filename = os.path.split(xlsx_file)
@@ -86,7 +101,7 @@ def convert_xlsx_to_csv(xlsx_file):
 
 # Run file from command line
 if __name__ == "__main__":
-    import sys
+
     # Read augmented situation coverage grid file path
     if len(sys.argv) > 1:
         fpath = sys.argv[1]
@@ -100,4 +115,4 @@ if __name__ == "__main__":
     print("\nPRISM model saved in: "+prism_file)
 
 # >> Example usage: <<
-# python3 ./WildRob/run_dtmc.py "/home/gnvf500/Gricel-Documents/GithubGris/SafetySituationGrid/example-AGV/coverageGrid.csv"
+# python3 ./WildRob/run_dtmc.py "/home/gnvf500/Gricel-Documents/GithubGris/SafetySituationGrid/example-AGV/ascg/coverageGrid.csv"
