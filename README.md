@@ -16,13 +16,14 @@ This enables:
   <img width="500" alt="image" src="https://github.com/user-attachments/assets/ecaef262-7e3f-42eb-bf0b-212a8b67e3cd" />
 </p>
 
----
+
 
 ## Case Study: Autonomous Ground Vehicle (AGV) in a Warehouse
 
 We illustrate the feasibility of our approach using a case study where an **Autonomous Ground Vehicle (AGV)** operates within a warehouse environment, patrolling a set of designated locations. The safety of this AGV is verified based on the exhaustive analysis of potential warehouse situations.
 
-### Repository Structure
+
+## Repository Structure
 
 All components of the methodology are organized in the following directories:
 
@@ -46,7 +47,6 @@ All components of the methodology are organized in the following directories:
    
    Verification is performed using the **PRISM probabilistic model checker**, enabling automated quantitative safety analysis of the ASCG.
 
----
 
 ## How to Run
 
@@ -63,7 +63,6 @@ python run_dtmc.py ./example-AGV/ascg/coverageGrid.csv
 
 This will emit the probabilistic model (e.g., `coverageGrid.prism`) in the output directory **<path/to/ascg.csv>/gen-model**.
 
----
 
 ## Dependencies
 
