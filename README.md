@@ -50,10 +50,18 @@ All components of the methodology are organized in the following directories:
 
 ## How to Run
 
-To create the probabilistic model, provide the link to the ASCG provided as a CSV file (see )
-   ```
-   python run_dtmc.py <path_to_augmented_grid_csv_file>
-   ```
+Generate the DTMC from a ASCG CSV:
+
+```bash
+python run_dtmc.py <path/to/ascg.csv>
+```
+
+Example:
+```bash
+python run_dtmc.py ./example-AGV/ascg/coverageGrid.csv
+```
+
+This will emit the probabilistic model (e.g., `coverageGrid.prism`) in the output directory **<path/to/ascg.csv>/gen-model**.
 
 ---
 
