@@ -40,12 +40,11 @@ All components of the methodology are organized in the following directories:
   
 * [`./example-AGV/properties/`](./example-AGV/properties/)
   Formal **safety properties** expressed in temporal logic, derived from a hazard analysis of the AGV operation.
-
-* [`./src/prism-results/get_results.py`](./src/prism-results/get_results.py)
-  Script for the automated **verification** of the DTMC model under probabilistic safety properties defining each of the situations as an initial state using the probabilistic model checker PRISM.
   
 * [`./example-AGV/prism-results/`](./example-AGV/prism-results/)
-   **Verification results**, summary of verification outcomes and visual analytics.
+   **Verification results**, summary of verification outcomes and visual analytics. Script for the automated generation of such report available at [`./src/prism-results/get_results.py`](./src/prism-results/get_results.py). Results file prism_results.txt is obtained through the verification of the DTMC model under probabilistic safety properties defined in [`./example-AGV/properties/`](./example-AGV/properties/), each representing a situation as an initial state.
+   
+   Verification is performed using the **PRISM probabilistic model checker**, enabling automated quantitative safety analysis of the ASCG.
 
 ---
 
